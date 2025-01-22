@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}PROJECTS{% endblock %}
+
+{% block content %}
+<section id="project">
+    <h1 class="center-title">PROJECTS</h1>
+
+    <div class="project-item">
+        <div class="project-header">
+            <h3 class="project-title">Movie Ticket Booking System</h3>
+        </div>
+        <p style="text-align: left;">
+            Designed and developed a comprehensive web-based movie ticket booking system using HTML, CSS, and Bootstrap to deliver a visually appealing and responsive interface. Built back-end functionality with PHP and integrated a MySQL database to handle movie listings, user registrations, seat availability, and bookings. Incorporated real-time seat updates to ensure accurate reservations and prevent conflicts. Developed an intuitive admin panel for managing movies, showtimes, and monitoring ticket sales. Ensured scalability and seamless user experience by focusing on responsive design and robust database operations.
+        </p>
+        <!-- First Row -->
+        <div class="project-row">
+            <img src="{% static 'images/MTB1.png' %}" alt="Project Image 1" class="project-img">
+            <img src="{% static 'images/MVB2.png' %}" alt="Project Image 3" class="project-img">
+
+        </div>
+    </div>
+    
+
+    <div class="project-item">
+        <div class="project-header">
+            <h3 class="project-title">Content Sharing Application</h3>
+        </div>
+        <p style="text-align: left;">
+            Developed a robust web-based application using the Django framework, enabling users to register, log in, and share posts. The platform features a timeline view where users can see posts shared by others, enhancing community engagement. Integrated secure user authentication and authorization mechanisms to ensure data privacy. Designed dynamic post creation with media upload support, allowing users to share images and files seamlessly. Leveraged Django ORM with SQL for efficient relational data management and implemented pagination for optimized content navigation. Styled the front-end using HTML and CSS, achieving a clean and responsive user interface. The application adheres to the MVC architecture, ensuring scalability, maintainability, and efficient organization of logic.
+        </p>
+        <!-- First Row -->
+        <div class="project-row">
+            <img src="{% static 'images/CSA4.png' %}" alt="Project Image 1" class="project-img">
+            <img src="{% static 'images/CSA2.png' %}" alt="Project Image 2" class="project-img">
+        </div>
+        <!-- Second Row -->
+        <div class="project-row">
+            <img src="{% static 'images/CSA3.png' %}" alt="Project Image 3" class="project-img">
+            <img src="{% static 'images/CSA1.png' %}" alt="Project Image 4" class="project-img">
+        </div>
+    </div>
+
+    <div class="project-item">
+        <div class="project-header">
+            <h3 class="project-title">Bad Jokes Application</h3>
+        </div>
+        <p style="text-align: left;">
+            Developed a dynamic and engaging React.js application that fetches and displays jokes, enabling users to vote on their favorites with real-time score updates. Integrated the icanhazdadjoke API to dynamically fetch jokes while avoiding duplicates. Designed an intuitive and responsive user interface using CSS, with dynamic visuals such as color-coded scores and emojis based on joke popularity. Implemented React's state management to handle user interactions and ensure seamless updates. Used local storage to persist data across sessions, reducing unnecessary API calls and improving user experience. Built with a scalable, component-based architecture for maintainability and easy feature expansion. This project combines creativity and technical skills to deliver an engaging and interactive web application.
+        </p>
+        <!-- First Row -->
+        <div class="project-row">
+            <img src="{% static 'images/BJ1.png' %}" alt="Project Image 1" class="project-img">
+        </div>
+    </div>
+
+</section>
+{% endblock %}
