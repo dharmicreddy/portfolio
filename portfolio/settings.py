@@ -117,7 +117,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']  # Your static files directory
+STATICFILES_DIRS = [BASE_DIR / 'static', 
+                    ]  # Your static files directory
 STATIC_ROOT = BASE_DIR / 'staticfiles'   # The directory where collectstatic will store files
 
 
