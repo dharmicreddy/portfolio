@@ -20,6 +20,9 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') or [
     '127.0.0.1'
 ]
 
+print("DEBUG:", DEBUG)
+print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -112,8 +115,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Directory for development static files
 STATIC_ROOT = BASE_DIR / 'staticfiles'   # Directory for collected static files
 
-# Use WhiteNoise for static file compression and caching in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
