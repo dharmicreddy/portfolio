@@ -14,10 +14,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'your-fallback-secret-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') or [
+ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '.vercel.app'  # Matches all Vercel domains
+    '.vercel.app'
 ]
 
 
