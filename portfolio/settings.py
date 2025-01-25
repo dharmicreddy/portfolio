@@ -15,10 +15,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'your-fallback-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') or [
-    'myportfoliodjango-balp2exoa-dharmics-projects-a2d2c55f.vercel.app',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    '.vercel.app'  # Matches all Vercel domains
 ]
+
 
 print("DEBUG:", DEBUG)
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
