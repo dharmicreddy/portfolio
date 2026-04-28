@@ -420,6 +420,30 @@ section { padding: 96px 0; position: relative; }
 }
 .repo-link:hover { color: var(--accent); border-color: var(--accent-dim); }
 .repo-link svg { width: 13px; height: 13px; }
+.live-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--bg);
+  background: var(--accent);
+  padding: 7px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.live-link:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.live-link svg { width: 13px; height: 13px; }
+.live-link .live-dot {
+  width: 7px; height: 7px;
+  background: var(--bg);
+  border-radius: 50%;
+  animation: blink 1.5s ease-in-out infinite;
+}
+.project-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .project-desc {
   font-size: 15px;
   line-height: 1.65;
@@ -719,7 +743,7 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
       <div class="info-grid fade-up d1">
         <div class="info-row"><span class="info-key">location</span><span class="info-val">Austin, Texas</span></div>
         <div class="info-row"><span class="info-key">current</span><span class="info-val">Sr Data Analyst · UT Austin</span></div>
-        <div class="info-row"><span class="info-key">focus</span><span class="info-val ac">Lakehouse Architecture · Retrieval-Augmented Generation (RAG) · Data Pipelines</span></div>
+        <div class="info-row"><span class="info-key">focus</span><span class="info-val ac">Data Engineering · AI retrieval</span></div>
         <div class="info-row"><span class="info-key">experience</span><span class="info-val">3+ years production systems</span></div>
         <div class="info-row"><span class="info-key">status</span><span class="info-val ok">Open to opportunities</span></div>
       </div>
@@ -780,7 +804,6 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
             <li>Designed dimensional models and optimized DAX using SUMMARIZECOLUMNS patterns and calculation groups. Cut ad-hoc data requests from 15 to 7 per month (<b>53% reduction</b>) and accelerated budget reviews by 3 days.</li>
             <li>Migrated 15+ legacy Tableau workloads onto the governed Power BI semantic layer, standardizing KPI logic and fiscal hierarchies across teams.</li>
             <li>Orchestrated Power Automate workflows for dataset refresh alerts, multi-stage approval routing, and exception flagging. Eliminated <b>5+ hours per week</b> of manual follow-up.</li>
-            <li>Leveraged <b>MCP integration</b> with Fabric semantic models to bridge governed enterprise data and LLM-based retrieval systems, enabling natural language analytics at scale.</li>
           </ul>
         </div>
       </article>
@@ -845,6 +868,114 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
     </div>
 
     <div class="projects">
+
+      <article class="project fade-up">
+        <div class="project-head">
+          <div class="project-title-group">
+            <div class="project-tag">Data Engineering · Sports ML</div>
+            <h3>IPL Winner Prediction</h3>
+          </div>
+          <div class="project-actions">
+            <a href="https://ipl-winner-prediction-sample.streamlit.app/" target="_blank" rel="noopener" class="live-link">
+              <span class="live-dot"></span>
+              Live demo
+            </a>
+            <a href="https://github.com/dharmicreddy/ipl-winner-prediction" target="_blank" rel="noopener" class="repo-link">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              Repo
+            </a>
+          </div>
+        </div>
+        <p class="project-desc">
+          End-to-end data engineering pipeline for IPL match prediction. <b>Built on licensed open data and official APIs only, no Terms-of-Service compromises.</b> Ingests historical match data from Cricsheet (ODbL), venue metadata from Wikipedia (CC BY-SA), and upcoming fixtures from CricketData.org. Flows through a dbt warehouse with star schema, feeds an XGBoost classifier with probability calibration, and serves predictions through a deployed Streamlit dashboard.
+        </p>
+
+        <div class="project-split">
+          <div>
+            <div class="col-title">What I built</div>
+            <ul class="proj-bullets">
+              <li><b>dbt warehouse</b> with bronze, silver, and gold layers. Star schema across <code>fact_matches</code>, <code>fact_ball_by_ball</code>, <code>dim_teams</code>, <code>dim_venues</code>, <code>dim_players</code>, plus a <code>team_canonical</code> seed for entity resolution.</li>
+              <li><b>SCD Type 2 snapshot</b> tracking team rebrandings (e.g. RCB Bangalore to Bengaluru) so historical matches stay tied to the right entity.</li>
+              <li><b>Strict walk-forward modeling split</b> (train: 2022, val: early 2023, holdout: late 2023 + 2024). XGBoost beats baseline by <b>9.8pp accuracy</b> on the 102-match holdout.</li>
+              <li><b>Probability calibration</b> with reliability diagram, Brier score, and ECE reported honestly in a published model card. MLflow tracks every run.</li>
+              <li><b>Dual-runtime orchestration</b>: same Python entrypoints run inside both GitHub Actions (weekly cron, ephemeral Postgres service container) and a local Airflow DAG.</li>
+              <li><b>Live Streamlit dashboard</b> with three pages (Predict, Calibration, Data). Reads from a SQLite snapshot bundled in the repo so the deploy is free-tier.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="col-title">Tech stack</div>
+            <div class="tech-table">
+              <div class="row"><span class="k">Language</span><span class="v"><b>Python</b></span></div>
+              <div class="row"><span class="k">Warehouse</span><span class="v"><span class="hl">PostgreSQL</span> <span class="sep">·</span> <span class="hl">dbt Core</span></span></div>
+              <div class="row"><span class="k">ML</span><span class="v"><b>scikit-learn</b> <span class="sep">·</span> <span class="hl">XGBoost</span> <span class="sep">·</span> calibration <span class="sep">·</span> <b>MLflow</b></span></div>
+              <div class="row"><span class="k">Orchestration</span><span class="v"><b>GitHub Actions</b> (prod) <span class="sep">·</span> <b>Airflow</b> (local demo)</span></div>
+              <div class="row"><span class="k">Dashboard</span><span class="v"><span class="hl">Streamlit</span> Community Cloud <span class="sep">·</span> SQLite snapshot</span></div>
+              <div class="row"><span class="k">Ingestion</span><span class="v">Python <span class="sep">·</span> httpx <span class="sep">·</span> bulk download + REST APIs</span></div>
+              <div class="row"><span class="k">Data Sources</span><span class="v">Cricsheet (ODbL) <span class="sep">·</span> Wikipedia (CC BY-SA) <span class="sep">·</span> CricketData.org</span></div>
+              <div class="row"><span class="k">Patterns</span><span class="v"><b>Star Schema</b> <span class="sep">·</span> <b>SCD Type 2</b> <span class="sep">·</span> Walk-forward CV</span></div>
+              <div class="row"><span class="k">Infra</span><span class="v">Docker <span class="sep">·</span> docker-compose <span class="sep">·</span> ephemeral PG service</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-foot">
+          <div class="foot-stat"><b>XGBoost +9.8pp</b> · <b>218</b> matches · <b>Live</b> Streamlit demo</div>
+          <a href="https://github.com/dharmicreddy/ipl-winner-prediction" target="_blank" rel="noopener" class="repo-link">
+            View on GitHub
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h8v8M13 3L5 11"/></svg>
+          </a>
+        </div>
+      </article>
+      <article class="project fade-up">
+        <div class="project-head">
+          <div class="project-title-group">
+            <div class="project-tag">AI Data Engineering · Vector Search</div>
+            <h3>arXiv RAG Pipeline with pgvector</h3>
+          </div>
+          <a href="https://github.com/dharmicreddy/arxiv-rag-pipeline-pgvector" target="_blank" rel="noopener" class="repo-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            Repo
+          </a>
+        </div>
+        <p class="project-desc">
+          A production-shaped RAG retrieval layer over recent arXiv ML papers. <b>Not a notebook demo.</b> Pulls papers via the arXiv API, chunks titles and abstracts with a sliding window, embeds each chunk on CPU with sentence-transformers, stores everything in Postgres + pgvector with an HNSW index, and serves semantic search behind a typed FastAPI endpoint with category filtering.
+        </p>
+
+        <div class="project-split">
+          <div>
+            <div class="col-title">What I built</div>
+            <ul class="proj-bullets">
+              <li><b>One Postgres for metadata and vectors.</b> arXiv category filter and cosine ranking happen in a single SQL query. No separate vector DB service.</li>
+              <li><b>HNSW cosine index</b> aligned with <code>vector_cosine_ops</code> on L2-normalized embeddings so the operator and index agree for correct ANN ranking.</li>
+              <li><b>psycopg3 connection pool</b> with pgvector type adapter registered at connect time. <code>numpy.ndarray</code> and <code>vector</code> stay allocation-free on ingest and search.</li>
+              <li><b>Resilient arXiv ingestion:</b> httpx + feedparser + tenacity retries, 3-second rate limiting, paginated fetch with idempotent delete-then-insert per paper.</li>
+              <li><b>GitHub Actions CI</b> spins up a real <code>pgvector/pgvector:pg16</code> service container to verify migrations and ANN search end to end.</li>
+            </ul>
+          </div>
+          <div>
+            <div class="col-title">Tech stack</div>
+            <div class="tech-table">
+              <div class="row"><span class="k">Language</span><span class="v"><b>Python 3.11</b></span></div>
+              <div class="row"><span class="k">API</span><span class="v"><span class="hl">FastAPI</span> <span class="sep">·</span> <b>Pydantic v2</b></span></div>
+              <div class="row"><span class="k">Vector DB</span><span class="v"><span class="hl">Postgres 16</span> <span class="sep">·</span> <span class="hl">pgvector</span> <span class="sep">·</span> HNSW (cosine)</span></div>
+              <div class="row"><span class="k">Embeddings</span><span class="v"><b>sentence-transformers</b> <span class="sep">·</span> all-MiniLM-L6-v2 (384-dim)</span></div>
+              <div class="row"><span class="k">DB Driver</span><span class="v"><b>psycopg3</b> <span class="sep">·</span> connection pool <span class="sep">·</span> pgvector adapter</span></div>
+              <div class="row"><span class="k">Ingestion</span><span class="v">httpx <span class="sep">·</span> feedparser <span class="sep">·</span> tenacity retries</span></div>
+              <div class="row"><span class="k">Config</span><span class="v">pydantic-settings <span class="sep">·</span> structlog</span></div>
+              <div class="row"><span class="k">Infra</span><span class="v"><b>Docker</b> <span class="sep">·</span> docker-compose <span class="sep">·</span> GitHub Actions CI</span></div>
+              <div class="row"><span class="k">Testing</span><span class="v">pytest <span class="sep">·</span> mocked API <span class="sep">·</span> pgvector integration</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-foot">
+          <div class="foot-stat"><b>pgvector</b> HNSW · <b>384-dim</b> embeddings · <b>FastAPI</b> /search</div>
+          <a href="https://github.com/dharmicreddy/arxiv-rag-pipeline-pgvector" target="_blank" rel="noopener" class="repo-link">
+            View on GitHub
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h8v8M13 3L5 11"/></svg>
+          </a>
+        </div>
+      </article>
 
       <article class="project fade-up">
         <div class="project-head">
@@ -941,56 +1072,6 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
         </div>
       </article>
 
-      <article class="project fade-up">
-        <div class="project-head">
-          <div class="project-title-group">
-            <div class="project-tag">AI Data Engineering · Vector Search</div>
-            <h3>arXiv RAG Pipeline with pgvector</h3>
-          </div>
-          <a href="https://github.com/dharmicreddy/arxiv-rag-pipeline-pgvector" target="_blank" rel="noopener" class="repo-link">
-            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-            Repo
-          </a>
-        </div>
-        <p class="project-desc">
-          A production-shaped RAG retrieval layer over recent arXiv ML papers. <b>Not a notebook demo.</b> Pulls papers via the arXiv API, chunks titles and abstracts with a sliding window, embeds each chunk on CPU with sentence-transformers, stores everything in Postgres + pgvector with an HNSW index, and serves semantic search behind a typed FastAPI endpoint with category filtering.
-        </p>
-
-        <div class="project-split">
-          <div>
-            <div class="col-title">What I built</div>
-            <ul class="proj-bullets">
-              <li><b>One Postgres for metadata and vectors.</b> arXiv category filter and cosine ranking happen in a single SQL query. No separate vector DB service.</li>
-              <li><b>HNSW cosine index</b> aligned with <code>vector_cosine_ops</code> on L2-normalized embeddings so the operator and index agree for correct ANN ranking.</li>
-              <li><b>psycopg3 connection pool</b> with pgvector type adapter registered at connect time. <code>numpy.ndarray</code> and <code>vector</code> stay allocation-free on ingest and search.</li>
-              <li><b>Resilient arXiv ingestion:</b> httpx + feedparser + tenacity retries, 3-second rate limiting, paginated fetch with idempotent delete-then-insert per paper.</li>
-              <li><b>GitHub Actions CI</b> spins up a real <code>pgvector/pgvector:pg16</code> service container to verify migrations and ANN search end to end.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="col-title">Tech stack</div>
-            <div class="tech-table">
-              <div class="row"><span class="k">Language</span><span class="v"><b>Python 3.11</b></span></div>
-              <div class="row"><span class="k">API</span><span class="v"><span class="hl">FastAPI</span> <span class="sep">·</span> <b>Pydantic v2</b></span></div>
-              <div class="row"><span class="k">Vector DB</span><span class="v"><span class="hl">Postgres 16</span> <span class="sep">·</span> <span class="hl">pgvector</span> <span class="sep">·</span> HNSW (cosine)</span></div>
-              <div class="row"><span class="k">Embeddings</span><span class="v"><b>sentence-transformers</b> <span class="sep">·</span> all-MiniLM-L6-v2 (384-dim)</span></div>
-              <div class="row"><span class="k">DB Driver</span><span class="v"><b>psycopg3</b> <span class="sep">·</span> connection pool <span class="sep">·</span> pgvector adapter</span></div>
-              <div class="row"><span class="k">Ingestion</span><span class="v">httpx <span class="sep">·</span> feedparser <span class="sep">·</span> tenacity retries</span></div>
-              <div class="row"><span class="k">Config</span><span class="v">pydantic-settings <span class="sep">·</span> structlog</span></div>
-              <div class="row"><span class="k">Infra</span><span class="v"><b>Docker</b> <span class="sep">·</span> docker-compose <span class="sep">·</span> GitHub Actions CI</span></div>
-              <div class="row"><span class="k">Testing</span><span class="v">pytest <span class="sep">·</span> mocked API <span class="sep">·</span> pgvector integration</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-foot">
-          <div class="foot-stat"><b>pgvector</b> HNSW · <b>384-dim</b> embeddings · <b>FastAPI</b> /search</div>
-          <a href="https://github.com/dharmicreddy/arxiv-rag-pipeline-pgvector" target="_blank" rel="noopener" class="repo-link">
-            View on GitHub
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 3h8v8M13 3L5 11"/></svg>
-          </a>
-        </div>
-      </article>
 
     </div>
   </div>
@@ -1013,8 +1094,9 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
           <span class="tag pri">Databricks</span>
           <span class="tag pri">Azure Data Factory</span>
           <span class="tag pri">PySpark</span>
+          <span class="tag pri">dbt</span>
+          <span class="tag pri">Apache Airflow</span>
           <span class="tag">Apache Spark</span>
-          <span class="tag">dbt</span>
           <span class="tag">Dataflows Gen2</span>
           <span class="tag">Databricks Workflows</span>
           <span class="tag">Medallion Architecture</span>
@@ -1037,12 +1119,14 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
       </div>
 
       <div class="skill-group fade-up">
-        <h4><span class="ix">03</span> AI, NLP &amp; Vector Search</h4>
+        <h4><span class="ix">03</span> AI, ML &amp; Vector Search</h4>
         <div class="skill-tags">
           <span class="tag pri">RAG Pattern</span>
           <span class="tag pri">pgvector</span>
-          <span class="tag pri">sentence-transformers</span>
-          <span class="tag pri">LLM Integration</span>
+          <span class="tag pri">XGBoost</span>
+          <span class="tag pri">MLflow</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">sentence-transformers</span>
           <span class="tag">HNSW Indexing</span>
           <span class="tag">Semantic Search</span>
           <span class="tag">Embeddings</span>
@@ -1051,6 +1135,7 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
           <span class="tag">BeautifulSoup</span>
           <span class="tag">Scrapy</span>
           <span class="tag">FastAPI</span>
+          <span class="tag">Streamlit</span>
         </div>
       </div>
 
@@ -1085,12 +1170,12 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
         <h4><span class="ix">06</span> BI, Tools &amp; Ops</h4>
         <div class="skill-tags">
           <span class="tag pri">Power BI</span>
+          <span class="tag pri">Docker</span>
+          <span class="tag pri">GitHub Actions</span>
           <span class="tag">Semantic Models</span>
           <span class="tag">Direct Lake</span>
           <span class="tag">Tableau</span>
           <span class="tag">Databricks Dashboards</span>
-          <span class="tag">Docker</span>
-          <span class="tag">GitHub Actions</span>
           <span class="tag">Git</span>
           <span class="tag">Power Automate</span>
           <span class="tag">JIRA</span>
@@ -1161,6 +1246,7 @@ footer { padding: 40px 0 28px; border-top: 1px solid var(--border); margin-top: 
       <div class="container">
         <div class="footer-row">
           <span>© 2026 Dharmic Reddy Meka</span>
+          <span class="meta">Built with plain HTML &amp; CSS. No frameworks.</span>
         </div>
       </div>
     </footer>
